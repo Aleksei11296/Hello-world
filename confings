@@ -1,0 +1,6 @@
+TOKEN = '6303058025:AAER-s6-we9gZPiJHhMcsrmmXOuCOLOnUtk'
+exchanges = {
+    'евро': 'EUR',
+    'рубль': 'RUB',
+    'доллар': 'USD',
+}
