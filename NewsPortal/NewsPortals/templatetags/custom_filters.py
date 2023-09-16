@@ -11,7 +11,7 @@ def censor(value):
    """
    value: значение, к которому нужно применить фильтр
    """
-   list = ['команда', 'оружие', 'жизнь']
+   list = ['команда', 'дело', 'жизни']
    for word in value.split():
       if word in list:
          value = value.replace(word, f"{word[0]}{'*' * (len(word) - 1)}")

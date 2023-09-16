@@ -11,6 +11,8 @@ Post
 <!-- В контенте на странице мы выводим все товары -->
 {% block content %}
    <h1>Все посты</h1>
+   <h3>Тут вы сможете найти любой пост</h3>
+
     <h3>
         Количество постов: {{ post | length }}
     </h3>
@@ -20,6 +22,7 @@ Post
 <!--        {{ time_now | date:'d M Y' }}-->
 <!--    </h3>-->
 <!--    <h4> {{ next_sale|default_if_none:"Чуть позже сообщим о новом посте!" }} </h4>-->
+
    <hr>
    {% if post %}
        <table>
@@ -54,5 +57,29 @@ Post
        </table>
    {% else %}
        <h2>Постов нет!</h2>
+    {% endif %}
+
+{# Добавляем пагинацию на страницу #}
+
+   {# Информация о предыдущих страницах #}
+   {% if page_obj.has_previous %}
+       <a href="?page=1">1</a>
+       {% if page_obj.previous_page_number != 1 %}
+           ...
+           <a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+       {% endif %}
    {% endif %}
+
+   {# Информация о текущей странице #}
+   {{ page_obj.number }}
+
+   {# Информация о следующих страницах #}
+   {% if page_obj.has_next %}
+       <a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+       {% if paginator.num_pages != page_obj.next_page_number %}
+           ...
+           <a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+       {% endif %}
+   {% endif %}
+
 {% endblock content %}
