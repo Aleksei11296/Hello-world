@@ -94,6 +94,13 @@ class PostCreate(CreateView):
     # и новый шаблон, в котором используется форма.
     template_name = 'create.html'
 
+    def form_valid(self, form):
+        post = form.save(commit=False)
+        if self.request.path == 'posts/article/create/':
+            post.post.type = 'AT'
+        post.save()
+        return super().form_valid(form)
+
 class PostUpdate(UpdateView):
     # Указываем нашу разработанную форму
     form_class = PostForm
