@@ -7,7 +7,7 @@ from .forms import PostForm
 from .models import Post, BaseRegisterForm
 from .filters import PostFilter
 from pprint import pprint
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic import TemplateView
 
 from django.shortcuts import redirect
@@ -94,13 +94,14 @@ class PostsDetail(DetailView):
 
 # Добавляем новое представление для создания товаров.
 
-class PostUpdate(UpdateView):
+class PostUpdate(PermissionRequiredMixin, UpdateView):
     # Указываем нашу разработанную форму
     form_class = PostForm
     # модель товаров
     model = Post
     # и новый шаблон, в котором используется форма.
     template_name = 'create.html'
+    permission_required = ('NewsPortals.change_post',)
 
 
 class PostDelete(LoginRequiredMixin, DeleteView):
@@ -109,7 +110,7 @@ class PostDelete(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('post_list')
 
 
-class CreateView(LoginRequiredMixin, CreateView):
+class CreateView(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
     # Указываем нашу разработанную форму
     form_class = PostForm
     # модель товаров
@@ -117,6 +118,7 @@ class CreateView(LoginRequiredMixin, CreateView):
     # и новый шаблон, в котором используется форма.
     template_name = 'create.html'
     context_object_name = 'news'
+    permission_required = ('NewsPortals.add_post',)
 
     def form_valid(self, form):
         post = form.save(commit=False)
