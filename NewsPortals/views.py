@@ -172,7 +172,7 @@ class CatigoryView(Post_List):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['is_not_subscribers'] = self.request.user not in self.category.subscribers.all()
+        context['is_not_subscriber'] = self.request.user not in self.category.subscribers.all()
         context['category'] = self.category
         return context
 
