@@ -159,11 +159,12 @@ ACCOUNT_FORMS = {'signup': 'NewsPortals.forms.BasicSignupForm'}
 
 SITE_URL = 'http://127.0.0.1:8000'
 
-EMAIL_HOST = 'smtp.yandex.ru'
-EMAIL_PORT = 465
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 2525
 EMAIL_HOST_USER = os.getenv('pochta.kz112')
 EMAIL_HOST_PASSWORD = os.getenv('wcY3FsXSQVGiRzhLW2pv')
-EMAIL_USE_SSL = True
+EMAIL_USE_SSL = False
+EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = os.getenv('pochta.kz112@mail.ru')
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
