@@ -1,9 +1,0 @@
-{% extends 'flatpages/default.html' %}
-
-{% block content %}
-<h1>Вы зарегистрированы?</h1>
-<h2>Страница авторизованного пользователя {{request.user.username}}</h2>
-<div> Здесь может содержаться персональная информация для каждого пользователя </div>
-
-<button> <a href="post/logout/">Выйти</a> </button>
-{% endblock content %}
